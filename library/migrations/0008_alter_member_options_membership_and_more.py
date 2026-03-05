@@ -14,44 +14,5 @@ class Migration(migrations.Migration):
         migrations.AlterModelOptions(
             name="member",
             options={"verbose_name": "Участник", "verbose_name_plural": "Участники"},
-        ),
-        migrations.CreateModel(
-            name="Membership",
-            fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                (
-                    "library",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        to="library.library",
-                    ),
-                ),
-                (
-                    "member",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="library.member"
-                    ),
-                ),
-            ],
-            options={
-                "unique_together": {("member", "library")},
-            },
-        ),
-        migrations.AlterField(
-            model_name="member",
-            name="libraries",
-            field=models.ManyToManyField(
-                through="library.Membership",
-                to="library.library",
-                verbose_name="Библиотеки",
-            ),
-        ),
+        )
     ]
