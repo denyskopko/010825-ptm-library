@@ -36,17 +36,25 @@ class Member(models.Model):
     
     is_active:bool = models.BooleanField(default=True, verbose_name="Активный")
     
-    libraries: "Library"= models.ManyToManyField("Library", verbose_name="Библиотеки")
+    libraries = models.ManyToManyField("Library", through="Membership", verbose_name="Библиотеки")
     
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
     
+    class Meta:
+        verbose_name = "Участник"
+        verbose_name_plural = "Участники"
 
 
-
-# class Membership(models.Model):
-#     member: 'Member' = models.ForeignKey(to='Member', on_delete=models.CASCADE)
-#     library: 'Library' = models.ForeignKey(to='Library', on_delete=models.CASCADE)
+class Membership(models.Model):
+    member: 'Member' = models.ForeignKey(to='Member', on_delete=models.CASCADE)
+    library: 'Library' = models.ForeignKey(to='Library', on_delete=models.CASCADE)
     
-#     class Meta:
-#         unique_together = ('member','library')
+    class Meta:
+        unique_together = ('member','library')
+    
+    def __str__(self):
+        return f"{self.member.first_name} {self.member.last_name} - {self.library.name}"
+    
     
    
