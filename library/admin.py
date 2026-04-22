@@ -1,7 +1,5 @@
 from django.contrib import admin
-from library.models import Author, Book
-from library.models import Borrow
-from library.models.publisher import Publisher
+from library.models import Author, Book, Borrow, Publisher
 
 
 # Register your models here.
